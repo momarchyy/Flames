@@ -1,0 +1,132 @@
+<!Doctype html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flames Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body{
+            background-image: linear-gradient(to right, #DCD0FF , #C9A0DC);
+            color:#483D8B;
+        }
+        .bigstuff{
+            text-align: center;
+            font-size:40px;
+            color:purple;
+        }
+        #label1{
+            position:absolute;
+            top:250px;left:150px;
+            font-size:26px;
+            
+        }
+        #name1{
+            position:absolute;
+            top:300px;left:150px;
+            font-size:30px;
+            font-family:bold;
+            background-color:white;
+        }
+        #label2{
+            position:absolute;
+            top:250px;right:355px;
+            font-size:26px;
+            
+        }
+        #name2{
+            position:absolute;
+            top:300px;right:150px;
+            font-size:30px;
+            font-family:bold;
+            background-color:
+        }
+        #cb{
+            position:absolute;
+            top:425px;
+            background-color:#FFB6C1;
+            font-size:30px;
+            padding:10px;        
+            width:400px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor:pointer;
+            border=50px;
+        }
+        img{
+            width:100px;
+            position:absolute;
+            top:250px;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+        #print_ans{
+            text-align:center;
+            position:absolute;
+            top:500px;
+            font-size:30px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+            
+        }
+        #line{
+            height=10px;
+            width=20px;
+            border=10px;
+            background-color=pink;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bigstuff"><h1 > FLAMES CALCULATOR</h1></div> <div id="line" > <hr> </div>
+    <div style="text-align: center;">
+    <form  method="get" >
+        <label id="label1" for="name1">Your name</label><br>
+        <input  class="label1" margin=20px padding=50px type="text" id="name1" name="name1" placeholder="Your name" autofocus required>
+        <label id="label2" for="name2">Their name</label><br>
+        <input  type="text" id="name2" name="name2" placeholder="Their name" autofocus required><br>
+        
+    </form>
+    <button onclick="flames_calc()" type="button" id="cb"  >Calculate Relationship</button>
+    <p  id="print_ans"></p>
+    <img src="https://i.ibb.co/fzXS9Jmn/Subject.png"></img>
+    
+
+        <script>
+        function flames_calc() {
+            let name1 = document.getElementById("name1").value.toLowerCase().replace(/\s/g, '');
+            let name2 = document.getElementById("name2").value.toLowerCase().replace(/\s/g, '');
+            name1 = name1.split('');
+            name2 = name2.split('');
+            let count=0
+            for (let i = 0; i < name1.length; i++) {
+                for (let j = 0; j < name2.length; j++) {
+                    if (name1[i] === name2[j]) {
+                        name1[i] = '';
+                        name2[j] = '';
+                        count+=1;
+                        break;
+                    }
+                }
+            }
+            let total = name1.length + name2.length-2*count;
+            let flames = [0, 1, 2, 3, 4, 5];
+            let index=0;
+            while (flames.length > 1) {
+                index=total%flames.length;
+                flames.splice(index-1,1);
+                let a=flames.slice(index-1)
+                let b=flames.slice(0,index-1)
+                let c=a.concat(b)
+                flames=c
+            }
+            let index2=flames[0];
+        final_flames=["You guys are...friends!🤝","Your are...lovers!️️👩‍❤️‍👨","You have... affection for each other!💕", "You both are...married!👫", "You guys are...enemies!💔🔪", "Your guys are...siblings💀"];
+        document.getElementById("print_ans").innerHTML=final_flames[index2];
+        }
+        </script>
+</body>
+</html>
